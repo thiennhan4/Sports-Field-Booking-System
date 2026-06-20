@@ -60,6 +60,8 @@ builder.Services.AddScoped<ICourtService, CourtService>();
 builder.Services.AddScoped<ISlotService, SlotService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 // CQRS MediatR Registrations
 builder.Services.AddMediatR(cfg => 
@@ -69,7 +71,7 @@ builder.Services.AddMediatR(cfg =>
 builder.Services.AddValidatorsFromAssembly(typeof(SportBooking.Application.Features.Bookings.Commands.CreateBookingCommand).Assembly);
 
 // AutoMapper Registrations
-builder.Services.AddAutoMapper(typeof(SportBooking.Application.Interfaces.IAuthService).Assembly);
+builder.Services.AddAutoMapper(cfg => cfg.AddMaps(typeof(SportBooking.Application.Interfaces.IAuthService).Assembly));
 
 // Hangfire Registration
 builder.Services.AddHangfire(config => config

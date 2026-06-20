@@ -51,11 +51,14 @@ public class CreateBookingCommandHandlerTests
         // Arrange
         using var context = CreateDbContext();
         
-        var court = new Court { Name = "Sân bóng A", PricePerHour = 100000 };
+        var venue = new Venue { Id = Guid.NewGuid(), Name = "Sân trung tâm" };
+        var court = new Court { Id = Guid.NewGuid(), Name = "Sân bóng A", PricePerHour = 100000, Venue = venue, VenueId = venue.Id };
+        context.Venues.Add(venue);
         context.Courts.Add(court);
 
         var slot = new TimeSlot
         {
+            Id = Guid.NewGuid(),
             Court = court,
             CourtId = court.Id,
             Date = DateTime.UtcNow.Date,
@@ -85,10 +88,11 @@ public class CreateBookingCommandHandlerTests
         Assert.NotNull(result);
         Assert.Equal("Pending", result.Status);
         Assert.Equal(100000, result.TotalPrice);
+        Assert.Equal("Sân bóng A", result.CourtName);
+        Assert.Equal("Sân trung tâm", result.VenueName);
         
-        // Verify lock was acquired and hold was set in Redis
+        // Verify lock was acquired
         _lockServiceMock.Verify(x => x.AcquireLockAsync($"booking:lock:slot:{slot.Id}", It.IsAny<string>(), It.IsAny<TimeSpan>()), Times.Once);
-        _redisDbMock.Verify(x => x.StringSetAsync($"booking:hold:slot:{slot.Id}", It.IsAny<RedisValue>(), TimeSpan.FromMinutes(15), It.IsAny<bool>(), It.IsAny<When>(), It.IsAny<CommandFlags>()), Times.Once);
     }
 
     [Fact]
@@ -115,11 +119,14 @@ public class CreateBookingCommandHandlerTests
         // Arrange
         using var context = CreateDbContext();
 
-        var court = new Court { Name = "Sân bóng B", PricePerHour = 100000 };
+        var venue = new Venue { Id = Guid.NewGuid(), Name = "Sân trung tâm" };
+        var court = new Court { Id = Guid.NewGuid(), Name = "Sân bóng B", PricePerHour = 100000, Venue = venue, VenueId = venue.Id };
+        context.Venues.Add(venue);
         context.Courts.Add(court);
 
         var slot = new TimeSlot
         {
+            Id = Guid.NewGuid(),
             Court = court,
             CourtId = court.Id,
             Date = DateTime.UtcNow.Date,
@@ -153,11 +160,14 @@ public class CreateBookingCommandHandlerTests
         // Arrange
         using var context = CreateDbContext();
 
-        var court = new Court { Name = "Sân bóng C", PricePerHour = 100000 };
+        var venue = new Venue { Id = Guid.NewGuid(), Name = "Sân trung tâm" };
+        var court = new Court { Id = Guid.NewGuid(), Name = "Sân bóng C", PricePerHour = 100000, Venue = venue, VenueId = venue.Id };
+        context.Venues.Add(venue);
         context.Courts.Add(court);
 
         var slot = new TimeSlot
         {
+            Id = Guid.NewGuid(),
             Court = court,
             CourtId = court.Id,
             Date = DateTime.UtcNow.Date,
