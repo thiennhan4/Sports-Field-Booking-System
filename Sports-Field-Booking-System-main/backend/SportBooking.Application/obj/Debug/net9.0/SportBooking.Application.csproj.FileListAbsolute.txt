@@ -1,0 +1,15 @@
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Application\bin\Debug\net9.0\SportBooking.Application.deps.json
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Application\bin\Debug\net9.0\SportBooking.Application.dll
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Application\bin\Debug\net9.0\SportBooking.Application.pdb
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Application\bin\Debug\net9.0\SportBooking.Domain.dll
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Application\bin\Debug\net9.0\SportBooking.Domain.pdb
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\SportBooking.Application.csproj.AssemblyReference.cache
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\SportBooking.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\SportBooking.Application.AssemblyInfoInputs.cache
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\SportBooking.Application.AssemblyInfo.cs
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\SportBooking.Application.csproj.CoreCompileInputs.cache
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\SportBoo.13BC7460.Up2Date
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\SportBooking.Application.dll
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\refint\SportBooking.Application.dll
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\SportBooking.Application.pdb
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\ref\SportBooking.Application.dll

@@ -1,0 +1,11 @@
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Domain\bin\Debug\net9.0\SportBooking.Domain.deps.json
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Domain\bin\Debug\net9.0\SportBooking.Domain.dll
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Domain\bin\Debug\net9.0\SportBooking.Domain.pdb
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.AssemblyInfoInputs.cache
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.AssemblyInfo.cs
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.csproj.CoreCompileInputs.cache
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.dll
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\refint\SportBooking.Domain.dll
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.pdb
+D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\ref\SportBooking.Domain.dll

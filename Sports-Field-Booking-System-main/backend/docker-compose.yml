@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  api:
+    image: sportbooking-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=SportBookingDb;User Id=sa;Password=YourStrong@Password123;TrustServerCertificate=True
+      - Redis__ConnectionString=redis:6379
+    depends_on:
+      - sqlserver
+      - redis
+    networks:
+      - sportbooking-network
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong@Password123
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - sportbooking-network
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - sportbooking-network
+
+volumes:
+  sqlserver_data:
+  redis_data:
+
+networks:
+  sportbooking-network:
+    driver: bridge
