@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using SportBooking.Application.DTOs.Payment;
 using SportBooking.Application.Interfaces;
 using SportBooking.Domain.Common;
@@ -13,10 +14,12 @@ namespace SportBooking.API.Controllers;
 public class PaymentsController : ControllerBase
 {
     private readonly IPaymentService _paymentService;
+    private readonly string _frontendUrl;
 
-    public PaymentsController(IPaymentService paymentService)
+    public PaymentsController(IPaymentService paymentService, IConfiguration configuration)
     {
         _paymentService = paymentService;
+        _frontendUrl = configuration["FrontendUrl"] ?? "http://localhost:5173";
     }
 
     [HttpPost("payments")]
@@ -52,15 +55,15 @@ public class PaymentsController : ControllerBase
     {
         var queryParams = HttpContext.Request.Query.ToDictionary(k => k.Key, v => v.Value.ToString());
         var idempotencyKey = queryParams.GetValueOrDefault("vnp_TransactionNo", Guid.NewGuid().ToString());
+        var bookingId = queryParams.GetValueOrDefault("vnp_TxnRef", "");
         
         var isSuccess = await _paymentService.HandleCallbackAsync(idempotencyKey, queryParams, PaymentProvider.VNPay);
         
-        if (isSuccess)
-            return Ok("VNPay payment successful");
-        return BadRequest("VNPay payment failed");
+        return Redirect($"{_frontendUrl}/payment/callback?status={(isSuccess ? "success" : "failed")}&provider=vnpay&bookingId={bookingId}");
     }
 
     [HttpPost("payments/callback/momo")]
+    [HttpGet("payments/callback/momo")]
     public async Task<IActionResult> MomoCallback()
     {
         var queryParams = HttpContext.Request.Query.ToDictionary(k => k.Key, v => v.Value.ToString());
@@ -70,12 +73,11 @@ public class PaymentsController : ControllerBase
         }
 
         var idempotencyKey = queryParams.GetValueOrDefault("transId", Guid.NewGuid().ToString());
+        var bookingId = queryParams.GetValueOrDefault("orderId", "");
         
         var isSuccess = await _paymentService.HandleCallbackAsync(idempotencyKey, queryParams, PaymentProvider.Momo);
         
-        if (isSuccess)
-            return Ok("Momo payment successful");
-        return BadRequest("Momo payment failed");
+        return Redirect($"{_frontendUrl}/payment/callback?status={(isSuccess ? "success" : "failed")}&provider=momo&bookingId={bookingId}");
     }
 
     [HttpPost("bookings/{bookingId}/refund")]

@@ -83,6 +83,7 @@ public class BookingService : IBookingService
             Status = booking.Status.ToString(),
             UserId = booking.UserId,
             CourtId = booking.CourtId,
+            VenueId = court.VenueId,
             CourtName = court.Name,
             VenueName = court.Venue?.Name ?? "Unknown",
             CreatedAt = booking.CreatedAt
@@ -102,6 +103,7 @@ public class BookingService : IBookingService
             Status = b.Status.ToString(),
             UserId = b.UserId,
             CourtId = b.CourtId,
+            VenueId = b.Court?.VenueId ?? Guid.Empty,
             CourtName = b.Court?.Name ?? "Unknown",
             VenueName = b.Court?.Venue?.Name ?? "Unknown",
             CreatedAt = b.CreatedAt
@@ -124,6 +126,7 @@ public class BookingService : IBookingService
             Status = b.Status.ToString(),
             UserId = b.UserId,
             CourtId = b.CourtId,
+            VenueId = b.Court?.VenueId ?? Guid.Empty,
             CourtName = b.Court?.Name ?? "Unknown",
             VenueName = b.Court?.Venue?.Name ?? "Unknown",
             CreatedAt = b.CreatedAt
@@ -194,6 +197,7 @@ public class BookingService : IBookingService
             Status = b.Status.ToString(),
             UserId = b.UserId,
             CourtId = b.CourtId,
+            VenueId = b.Court?.VenueId ?? Guid.Empty,
             CourtName = b.Court?.Name ?? "Unknown",
             VenueName = b.Court?.Venue?.Name ?? "Unknown",
             CreatedAt = b.CreatedAt
@@ -213,6 +217,7 @@ public class BookingService : IBookingService
             Status = b.Status.ToString(),
             UserId = b.UserId,
             CourtId = b.CourtId,
+            VenueId = b.Court?.VenueId ?? Guid.Empty,
             CourtName = b.Court?.Name ?? "Unknown",
             VenueName = b.Court?.Venue?.Name ?? "Unknown",
             CreatedAt = b.CreatedAt

@@ -5,6 +5,7 @@ using SportBooking.Domain.Entities;
 using SportBooking.Domain.Enums;
 using SportBooking.Domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -20,17 +21,20 @@ public class PaymentService : IPaymentService
     private readonly IBookingRepository _bookingRepository;
     private readonly IAppDbContext _context;
     private readonly IConnectionMultiplexer _redis;
+    private readonly IConfiguration _configuration;
 
     public PaymentService(
         IPaymentRepository paymentRepository, 
         IBookingRepository bookingRepository,
         IAppDbContext context,
-        IConnectionMultiplexer redis)
+        IConnectionMultiplexer redis,
+        IConfiguration configuration)
     {
         _paymentRepository = paymentRepository;
         _bookingRepository = bookingRepository;
         _context = context;
         _redis = redis;
+        _configuration = configuration;
     }
 
     public async Task<PaymentResponseDto> ProcessPaymentAsync(Guid userId, CreatePaymentDto dto)
@@ -113,7 +117,10 @@ public class PaymentService : IPaymentService
         if (booking.UserId != userId) throw new AppException("Bạn không có quyền thanh toán đơn đặt sân này.", 403);
         if (booking.Status != BookingStatus.Pending) throw new AppException("Trạng thái đơn đặt sân không hợp lệ.", 400);
 
-        var amountInVnd = (int)(booking.TotalPrice * 25000); // Base price calculation multiplier for real payment systems
+        var amountInVnd = (long)(booking.TotalPrice * 25000); // Base price calculation multiplier for real payment systems
+        var apiUrl = _configuration["ApiUrl"] ?? "http://localhost:5108";
+        var vnpayCallbackUrl = $"{apiUrl}/api/payments/callback/vnpay";
+        var momoCallbackUrl = $"{apiUrl}/api/payments/callback/momo";
 
         if (provider == PaymentProvider.VNPay)
         {
@@ -131,7 +138,7 @@ public class PaymentService : IPaymentService
                 { "vnp_Locale", "vn" },
                 { "vnp_OrderInfo", $"Thanh toan san SportBook booking {booking.Id}" },
                 { "vnp_OrderType", "other" },
-                { "vnp_ReturnUrl", "https://sportbook.vn/payment-callback/vnpay" },
+                { "vnp_ReturnUrl", vnpayCallbackUrl },
                 { "vnp_TxnRef", booking.Id.ToString() }
             };
 
@@ -144,10 +151,10 @@ public class PaymentService : IPaymentService
         {
             var momoUrl = "https://test-payment.momo.vn/v2/gateway/api/create";
             var requestId = Guid.NewGuid().ToString();
-            var rawSignature = $"accessKey=ACCESS_MOCK&amount={amountInVnd}&extraData=&ipnUrl=https://sportbook.vn/payment-callback/momo&orderId={booking.Id}&orderInfo=SportBook+Booking&partnerCode=MOMO_MOCK&redirectUrl=https://sportbook.vn/payment-callback/momo&requestId={requestId}&requestType=captureWallet";
+            var rawSignature = $"accessKey=ACCESS_MOCK&amount={amountInVnd}&extraData=&ipnUrl={momoCallbackUrl}&orderId={booking.Id}&orderInfo=SportBook+Booking&partnerCode=MOMO_MOCK&redirectUrl={momoCallbackUrl}&requestId={requestId}&requestType=captureWallet";
             
             var signature = HmacSha256("SECRET_KEY_MOCK", rawSignature);
-            return $"{momoUrl}?partnerCode=MOMO_MOCK&orderId={booking.Id}&requestId={requestId}&amount={amountInVnd}&orderInfo=SportBook+Booking&redirectUrl=https://sportbook.vn/payment-callback/momo&ipnUrl=https://sportbook.vn/payment-callback/momo&requestType=captureWallet&signature={signature}&extraData=";
+            return $"{momoUrl}?partnerCode=MOMO_MOCK&orderId={booking.Id}&requestId={requestId}&amount={amountInVnd}&orderInfo=SportBook+Booking&redirectUrl={momoCallbackUrl}&ipnUrl={momoCallbackUrl}&requestType=captureWallet&signature={signature}&extraData=";
         }
 
         throw new AppException("Phương thức thanh toán không hỗ trợ.", 400);

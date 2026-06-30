@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SportBooking.Application.DTOs.Auth; // Need to create a minimal DTO maybe, or map User directly
+using SportBooking.Application.DTOs.Admin;
 using SportBooking.Application.Interfaces;
 using SportBooking.Domain.Common;
 
@@ -16,6 +16,38 @@ public class AdminController : ControllerBase
     public AdminController(IAdminService adminService)
     {
         _adminService = adminService;
+    }
+
+    [HttpGet("stats")]
+    public async Task<ActionResult<ApiResponse<DashboardStatsDto>>> GetStats()
+    {
+        var stats = await _adminService.GetDashboardStatsAsync();
+        return Ok(ApiResponse<DashboardStatsDto>.Ok(stats, "Lấy thống kê thành công."));
+    }
+
+    [HttpGet("users")]
+    public async Task<ActionResult<ApiResponse<object>>> GetAllUsers()
+    {
+        var users = await _adminService.GetAllUsersAsync();
+        var result = users.Select(u => new AdminUserDto
+        {
+            Id = u.Id,
+            Username = u.Username,
+            Email = u.Email,
+            Phone = u.Phone,
+            Role = u.Role.ToString(),
+            IsApproved = u.IsApproved,
+            IsBlocked = u.IsDeleted,
+            CreatedAt = u.CreatedAt
+        });
+        return Ok(ApiResponse<object>.Ok(result, "Lấy danh sách người dùng thành công."));
+    }
+
+    [HttpPost("users/{id}/toggle-block")]
+    public async Task<ActionResult<ApiResponse<string>>> ToggleUserBlock(Guid id)
+    {
+        await _adminService.ToggleUserBlockAsync(id);
+        return Ok(ApiResponse<string>.Ok("Success", "Cập nhật trạng thái người dùng thành công."));
     }
 
     [HttpGet("owners/pending")]

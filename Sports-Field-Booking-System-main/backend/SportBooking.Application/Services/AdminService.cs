@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SportBooking.Application.DTOs.Admin;
 using SportBooking.Application.Interfaces;
 using SportBooking.Domain.Entities;
 using SportBooking.Domain.Enums;
@@ -78,5 +79,30 @@ public class AdminService : IAdminService
 
         user.IsDeleted = !user.IsDeleted;
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<DashboardStatsDto> GetDashboardStatsAsync()
+    {
+        var totalUsers = await _context.Users.CountAsync();
+        var totalVenues = await _context.Venues.CountAsync();
+        var pendingVenues = await _context.Venues.CountAsync(v => v.Status == VenueStatus.Maintenance);
+        var totalBookings = await _context.Bookings.CountAsync();
+        var confirmedBookings = await _context.Bookings.CountAsync(b =>
+            b.Status == BookingStatus.Confirmed || b.Status == BookingStatus.Completed);
+        var totalRevenue = await _context.Bookings
+            .Where(b => b.Status == BookingStatus.Confirmed || b.Status == BookingStatus.Completed)
+            .SumAsync(b => b.TotalPrice);
+        var pendingOwners = await _context.Users.CountAsync(u => u.Role == UserRole.Owner && !u.IsApproved);
+
+        return new DashboardStatsDto
+        {
+            TotalUsers = totalUsers,
+            TotalVenues = totalVenues,
+            PendingVenues = pendingVenues,
+            TotalBookings = totalBookings,
+            ConfirmedBookings = confirmedBookings,
+            TotalRevenue = totalRevenue,
+            PendingOwners = pendingOwners
+        };
     }
 }

@@ -34,6 +34,35 @@ public class VenuesController : ControllerBase
         return Ok(ApiResponse<IEnumerable<VenueResponseDto>>.Ok(result, "Venues retrieved successfully."));
     }
 
+    /// <summary>
+    /// Tìm kiếm sân với đầy đủ bộ lọc:
+    /// GET /api/venues/search?name=...&amp;district=...&amp;sportType=BADMINTON&amp;minPrice=100000&amp;maxPrice=300000&amp;startTime=08:00:00&amp;endTime=10:00:00
+    /// </summary>
+    [HttpGet("search")]
+    public async Task<ActionResult<ApiResponse<IEnumerable<VenueResponseDto>>>> Search(
+        [FromQuery] string? name,
+        [FromQuery] string? district,
+        [FromQuery] string? sportType,
+        [FromQuery] decimal? minPrice,
+        [FromQuery] decimal? maxPrice,
+        [FromQuery] string? startTime,
+        [FromQuery] string? endTime)
+    {
+        var query = new VenueSearchQueryDto
+        {
+            Name = name,
+            District = district,
+            SportType = sportType,
+            MinPrice = minPrice,
+            MaxPrice = maxPrice,
+            StartTime = !string.IsNullOrWhiteSpace(startTime) && TimeSpan.TryParse(startTime, out var st) ? st : null,
+            EndTime = !string.IsNullOrWhiteSpace(endTime) && TimeSpan.TryParse(endTime, out var et) ? et : null
+        };
+
+        var result = await _venueService.SearchAsync(query);
+        return Ok(ApiResponse<IEnumerable<VenueResponseDto>>.Ok(result, "Search completed successfully."));
+    }
+
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<VenueResponseDto>>> GetById(Guid id)
     {

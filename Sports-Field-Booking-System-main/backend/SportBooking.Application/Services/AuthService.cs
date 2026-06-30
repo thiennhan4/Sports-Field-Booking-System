@@ -16,11 +16,13 @@ public class AuthService : IAuthService
 {
     private readonly IUserRepository _userRepository;
     private readonly IConfiguration _configuration;
+    private readonly IEmailSender _emailSender;
 
-    public AuthService(IUserRepository userRepository, IConfiguration configuration)
+    public AuthService(IUserRepository userRepository, IConfiguration configuration, IEmailSender emailSender)
     {
         _userRepository = userRepository;
         _configuration = configuration;
+        _emailSender = emailSender;
     }
 
     public async Task<AuthResponseDto> RegisterAsync(RegisterDto dto)
@@ -201,5 +203,79 @@ public class AuthService : IAuthService
         {
             return null;
         }
+    }
+
+    public async Task ForgotPasswordAsync(ForgotPasswordDto dto)
+    {
+        var user = await _userRepository.GetByEmailAsync(dto.Email);
+        if (user == null)
+            throw new AppException("Email không tồn tại trong hệ thống", 404);
+
+        // Generate 6-digit OTP
+        var otp = new Random().Next(100000, 999999).ToString();
+        user.PasswordResetOtp = otp;
+        user.PasswordResetOtpExpiryTime = DateTime.UtcNow.AddMinutes(10); // OTP expires in 10 minutes
+
+        await _userRepository.UpdateAsync(user);
+
+        // Send OTP via email
+        var emailBody = $@"
+            <h2>Mã OTP để đặt lại mật khẩu</h2>
+            <p>Mã OTP của bạn là: <strong>{otp}</strong></p>
+            <p>Mã này sẽ hết hạn sau 10 phút.</p>
+            <p>Nếu bạn không yêu cầu đặt lại mật khẩu, vui lòng bỏ qua email này.</p>
+        ";
+
+        await _emailSender.SendEmailAsync(user.Email, "Đặt lại mật khẩu - SmashPlay", emailBody);
+    }
+
+    public async Task<bool> VerifyOtpAsync(VerifyOtpDto dto)
+    {
+        var user = await _userRepository.GetByEmailAsync(dto.Email);
+        if (user == null)
+            return false;
+
+        if (user.PasswordResetOtp != dto.Otp)
+            return false;
+
+        if (user.PasswordResetOtpExpiryTime == null || user.PasswordResetOtpExpiryTime < DateTime.UtcNow)
+            return false;
+
+        return true;
+    }
+
+    public async Task ResetPasswordAsync(ResetPasswordDto dto)
+    {
+        var user = await _userRepository.GetByEmailAsync(dto.Email);
+        if (user == null)
+            throw new AppException("Email không tồn tại trong hệ thống", 404);
+
+        if (user.PasswordResetOtp != dto.Otp)
+            throw new AppException("OTP không đúng", 400);
+
+        if (user.PasswordResetOtpExpiryTime == null || user.PasswordResetOtpExpiryTime < DateTime.UtcNow)
+            throw new AppException("OTP đã hết hạn", 400);
+
+        // Update password
+        user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.NewPassword);
+        user.PasswordResetOtp = null;
+        user.PasswordResetOtpExpiryTime = null;
+
+        await _userRepository.UpdateAsync(user);
+    }
+
+    public async Task ChangePasswordAsync(ChangePasswordDto dto)
+    {
+        var user = await _userRepository.GetByEmailAsync(dto.Email);
+        if (user == null)
+            throw new AppException("Email không tồn tại trong hệ thống", 404);
+
+        // Verify current password
+        if (!BCrypt.Net.BCrypt.Verify(dto.CurrentPassword, user.PasswordHash))
+            throw new AppException("Mật khẩu hiện tại không đúng", 400);
+
+        // Update password
+        user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.NewPassword);
+        await _userRepository.UpdateAsync(user);
     }
 }

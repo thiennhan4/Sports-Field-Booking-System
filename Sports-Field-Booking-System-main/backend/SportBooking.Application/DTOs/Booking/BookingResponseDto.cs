@@ -10,6 +10,7 @@ public class BookingResponseDto
     public string Status { get; set; } = string.Empty;
     public Guid UserId { get; set; }
     public Guid CourtId { get; set; }
+    public Guid VenueId { get; set; }
     public string CourtName { get; set; } = string.Empty;
     public string VenueName { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; }

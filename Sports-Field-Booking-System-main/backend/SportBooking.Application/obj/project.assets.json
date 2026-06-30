@@ -1282,32 +1282,40 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Long\\AppData\\Local\\Temp\\cursor-sandbox-cache\\b4814d2c46893a395cf38d2c06db2b19\\nuget": {}
+    "C:\\Users\\ADMI\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Downloads\\DoAnAWSFE\\Sports-Field-Booking-System-main\\backend\\SportBooking.Application\\SportBooking.Application.csproj",
+      "projectUniqueName": "D:\\Hoc\\THUCTAP\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Application\\SportBooking.Application.csproj",
       "projectName": "SportBooking.Application",
-      "projectPath": "D:\\Downloads\\DoAnAWSFE\\Sports-Field-Booking-System-main\\backend\\SportBooking.Application\\SportBooking.Application.csproj",
-      "packagesPath": "C:\\Users\\Long\\AppData\\Local\\Temp\\cursor-sandbox-cache\\b4814d2c46893a395cf38d2c06db2b19\\nuget",
-      "outputPath": "D:\\Downloads\\DoAnAWSFE\\Sports-Field-Booking-System-main\\backend\\SportBooking.Application\\obj\\",
+      "projectPath": "D:\\Hoc\\THUCTAP\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Application\\SportBooking.Application.csproj",
+      "packagesPath": "C:\\Users\\ADMI\\.nuget\\packages\\",
+      "outputPath": "D:\\Hoc\\THUCTAP\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Application\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Long\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\ADMI\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "D:\\Downloads\\DoAnAWSFE\\Sports-Field-Booking-System-main\\backend\\SportBooking.Domain\\SportBooking.Domain.csproj": {
-              "projectPath": "D:\\Downloads\\DoAnAWSFE\\Sports-Field-Booking-System-main\\backend\\SportBooking.Domain\\SportBooking.Domain.csproj"
+            "D:\\Hoc\\THUCTAP\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Domain\\SportBooking.Domain.csproj": {
+              "projectPath": "D:\\Hoc\\THUCTAP\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Domain\\SportBooking.Domain.csproj"
             }
           }
         }
@@ -1381,7 +1389,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.315/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -19,6 +19,23 @@ const fetchCourtsForVenue = async (venueId) => {
 };
 
 export const venueService = {
+  // Tìm kiếm nâng cao — gọi backend endpoint /api/venues/search
+  async searchAdvanced({ name, district, sportType, minPrice, maxPrice, startTime, endTime } = {}) {
+    const params = new URLSearchParams();
+    if (name) params.append("name", name);
+    if (district) params.append("district", district);
+    if (sportType) params.append("sportType", sportType);
+    if (minPrice !== undefined && minPrice !== "") params.append("minPrice", minPrice);
+    if (maxPrice !== undefined && maxPrice !== "") params.append("maxPrice", maxPrice);
+    if (startTime) params.append("startTime", startTime);
+    if (endTime) params.append("endTime", endTime);
+
+    const response = await api.get(`/venues/search?${params.toString()}`);
+    const venues = unwrap(response) || [];
+    return venues.map(mapVenue);
+  },
+
+  // Legacy client-side search (kept for backwards compatibility)
   async search({ district, sportType, minPrice, maxPrice } = {}) {
     let results = (await fetchAllVenues()).filter((v) => v.status === "APPROVED");
 
@@ -50,6 +67,7 @@ export const venueService = {
     return results;
   },
 
+
   async getAll() {
     return fetchAllVenues();
   },
@@ -72,6 +90,7 @@ export const venueService = {
         ? `${venueData.address}, ${venueData.district}`
         : venueData.address,
       phone: venueData.phone || "0900000000",
+      imageUrl: venueData.imageUrl || "",
     });
     return mapVenue(unwrap(response));
   },
@@ -83,6 +102,7 @@ export const venueService = {
       description: updatedData.description ?? current.description,
       address: updatedData.address ?? current.address,
       phone: updatedData.phone ?? current.phone,
+      imageUrl: updatedData.imageUrl ?? current.imageUrl,
       status: mapVenueStatusToBackend(updatedData.status ?? current.status),
     });
     return mapVenue(unwrap(response));

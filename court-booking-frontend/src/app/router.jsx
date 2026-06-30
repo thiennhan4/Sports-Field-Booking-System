@@ -14,11 +14,16 @@ import { SearchVenuePage } from "../pages/public/SearchVenuePage";
 import { VenueDetailPage } from "../pages/public/VenueDetailPage";
 import { LoginPage } from "../pages/public/LoginPage";
 import { RegisterPage } from "../pages/public/RegisterPage";
+import { ForgotPasswordPage } from "../pages/public/ForgotPasswordPage";
 
 // Customer Pages
 import { BookingFlowPage } from "../pages/customer/BookingFlowPage";
 import { MyBookingsPage } from "../pages/customer/MyBookingsPage";
 import { ProfilePage } from "../pages/customer/ProfilePage";
+import { SettingsPage } from "../pages/customer/SettingsPage";
+import { ChangePasswordPage } from "../pages/customer/ChangePasswordPage";
+import { PaymentCallbackPage } from "../pages/customer/PaymentCallbackPage";
+import { BookingSuccessPage } from "../pages/customer/BookingSuccessPage";
 
 // Owner Pages
 import { OwnerDashboard } from "../pages/owner/OwnerDashboard";
@@ -58,6 +63,10 @@ export const router = createBrowserRouter([
         path: "register",
         element: <RegisterPage />
       },
+      {
+        path: "forgot-password",
+        element: <ForgotPasswordPage />
+      },
       // Customer Routes protected by MainLayout (with user role checks)
       {
         path: "book",
@@ -70,6 +79,22 @@ export const router = createBrowserRouter([
       {
         path: "profile",
         element: <ProfilePage />
+      },
+      {
+        path: "settings",
+        element: <SettingsPage />
+      },
+      {
+        path: "change-password",
+        element: <ChangePasswordPage />
+      },
+      {
+        path: "payment/callback",
+        element: <PaymentCallbackPage />
+      },
+      {
+        path: "booking-success",
+        element: <BookingSuccessPage />
       }
     ]
   },

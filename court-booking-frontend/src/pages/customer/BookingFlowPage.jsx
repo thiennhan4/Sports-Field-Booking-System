@@ -6,7 +6,8 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { venueService } from "../../services/venue.service";
 import { bookingService } from "../../services/booking.service";
 import { useAuth } from "../../hooks/useAuth";
-import { Calendar, Clock, CreditCard, ChevronRight, CheckCircle2, ChevronLeft, ShieldAlert } from "lucide-react";
+import { Calendar, Clock, CreditCard, ChevronRight, CheckCircle2, ChevronLeft, ShieldAlert, X } from "lucide-react";
+import { QRCodePayment } from "../../components/QRCodePayment";
 
 export const BookingFlowPage = () => {
   const [searchParams] = useSearchParams();
@@ -15,6 +16,7 @@ export const BookingFlowPage = () => {
 
   // Wizard state
   const [step, setStep] = useState(1);
+  const [showQRModal, setShowQRModal] = useState(false);
 
   // Selections
   const [selectedVenueId, setSelectedVenueId] = useState(searchParams.get("venueId") || "");
@@ -83,22 +85,75 @@ export const BookingFlowPage = () => {
   // React Mutation for booking submission
   const bookingMutation = useMutation({
     mutationFn: bookingService.createBooking,
-    onSuccess: () => {
-      navigate("/my-bookings");
+    onSuccess: (data) => {
+      console.log("Booking success:", data);
+      console.log("Current venue:", currentVenue);
+      console.log("Current court:", currentCourt);
+      console.log("Selected date:", selectedDate);
+      console.log("Selected slots:", selectedSlots);
+      console.log("Slots availability:", slotsAvailability);
+      
+      // Navigate to success page with booking data
+      navigate("/booking-success", { 
+        state: { 
+          bookingData: {
+            id: data.id,
+            venueName: currentVenue?.name || data.venueName,
+            courtName: currentCourt?.name || data.courtName,
+            bookingDate: selectedDate,
+            slots: selectedSlots.map(slotId => {
+              const slot = slotsAvailability?.find((s) => s.id === slotId);
+              return slot?.time || slotId;
+            }),
+            paymentMethod,
+            totalPrice: totalAmount
+          }
+        }
+      });
     },
     onError: (error) => {
+      console.error("Booking error:", error);
       alert(error.message || "Đặt sân thất bại.");
     }
   });
 
   const handleConfirmBooking = () => {
     if (!user) return;
+    // Show QR modal for MOMO and VNPAY, direct booking for BANK
+    if (paymentMethod === "MOMO" || paymentMethod === "VNPAY") {
+      setShowQRModal(true);
+    } else {
+      bookingMutation.mutate({
+        courtId: selectedCourtId,
+        bookingDate: selectedDate,
+        slots: selectedSlots,
+        paymentMethod,
+      });
+    }
+  };
+
+  const handlePaymentConfirmed = () => {
+    setShowQRModal(false);
     bookingMutation.mutate({
       courtId: selectedCourtId,
       bookingDate: selectedDate,
       slots: selectedSlots,
       paymentMethod,
     });
+  };
+
+  const handleDirectPayment = () => {
+    setShowQRModal(false);
+    bookingMutation.mutate({
+      courtId: selectedCourtId,
+      bookingDate: selectedDate,
+      slots: selectedSlots,
+      paymentMethod,
+    });
+  };
+
+  const handlePaymentCancelled = () => {
+    setShowQRModal(false);
   };
 
   // Access check guard
@@ -492,6 +547,27 @@ export const BookingFlowPage = () => {
                 )}
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* QR Code Payment Modal */}
+      {showQRModal && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
+          <div className="relative max-w-lg w-full">
+            <button
+              onClick={handlePaymentCancelled}
+              className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <QRCodePayment
+              amount={totalAmount}
+              paymentMethod={paymentMethod}
+              onConfirm={handlePaymentConfirmed}
+              onCancel={handlePaymentCancelled}
+              onDirectPayment={handleDirectPayment}
+            />
           </div>
         </div>
       )}

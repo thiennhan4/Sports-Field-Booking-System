@@ -28,23 +28,11 @@ export const bookingService = {
     });
     const booking = mapBooking(unwrap(bookingResponse));
 
-    if (paymentMethod === "MOMO" || paymentMethod === "VNPAY") {
-      const provider = mapPaymentProvider(paymentMethod);
-      const urlResponse = await api.post("/payments/create-url", null, {
-        params: { bookingId: booking.id, provider },
-      });
-      const paymentUrl = unwrap(urlResponse);
-      if (paymentUrl) {
-        window.location.href = paymentUrl;
-        return booking;
-      }
-    }
-
-    await api.post("/payments", {
-      bookingId: booking.id,
-      provider: mapPaymentProvider(paymentMethod || "BANK"),
-    });
-
+    // For QR code payment (MOMO/VNPAY), we don't redirect to payment gateway
+    // The QR code is displayed in the frontend modal
+    // For BANK transfer, we also don't redirect
+    // Payment confirmation is handled by the user after seeing the QR code
+    
     return booking;
   },
 

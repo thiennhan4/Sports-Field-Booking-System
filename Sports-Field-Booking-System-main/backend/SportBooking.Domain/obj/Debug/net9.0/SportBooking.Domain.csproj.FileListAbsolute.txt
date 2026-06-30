@@ -9,3 +9,15 @@ D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Dom
 D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\refint\SportBooking.Domain.dll
 D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.pdb
 D:\Downloads\DoAnAWSFE\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\ref\SportBooking.Domain.dll
+D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\bin\Debug\net9.0\SportBooking.Domain.deps.json
+D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\bin\Debug\net9.0\SportBooking.Domain.dll
+D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\bin\Debug\net9.0\SportBooking.Domain.pdb
+D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.AssemblyInfoInputs.cache
+D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.AssemblyInfo.cs
+D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.csproj.CoreCompileInputs.cache
+D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.sourcelink.json
+D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.dll
+D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\refint\SportBooking.Domain.dll
+D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.pdb
+D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\ref\SportBooking.Domain.dll

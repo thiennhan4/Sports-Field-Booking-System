@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { venueService } from "../../services/venue.service";
-import { reviews } from "../../mocks/reviews";
+import { reviewService } from "../../services/review.service";
 import { Search, MapPin, Trophy, Star, ArrowRight, ShieldCheck } from "lucide-react";
 
 export const HomePage = () => {
@@ -16,6 +16,21 @@ export const HomePage = () => {
   const { data: featuredVenues, isLoading } = useQuery({
     queryKey: ["featuredVenues"],
     queryFn: () => venueService.search()
+  });
+
+  const uniqueDistricts = React.useMemo(() => {
+    if (!featuredVenues) return [];
+    const ds = featuredVenues.map((v) => v.district).filter(Boolean);
+    return Array.from(new Set(ds));
+  }, [featuredVenues]);
+
+  const displayDistricts = uniqueDistricts.length > 0
+    ? uniqueDistricts
+    : ["Quận 1", "Quận 3", "Quận 7", "Bình Thạnh", "Tân Bình", "Phú Nhuận", "Thủ Đức"];
+
+  const { data: recentReviews } = useQuery({
+    queryKey: ["recentReviews"],
+    queryFn: () => reviewService.getRecent(3)
   });
 
   const handleSearchSubmit = (e) => {
@@ -62,10 +77,9 @@ export const HomePage = () => {
                 className="w-full bg-transparent border-0 outline-none text-white text-sm cursor-pointer"
               >
                 <option value="" className="bg-[#0b0f19] text-gray-400">Chọn Khu vực (Quận / Huyện)</option>
-                <option value="Quận 7" className="bg-[#0b0f19] text-white">Quận 7</option>
-                <option value="Bình Thạnh" className="bg-[#0b0f19] text-white">Bình Thạnh</option>
-                <option value="Quận 1" className="bg-[#0b0f19] text-white">Quận 1</option>
-                <option value="Tân Bình" className="bg-[#0b0f19] text-white">Tân Bình</option>
+                {displayDistricts.map((d) => (
+                  <option key={d} value={d} className="bg-[#0b0f19] text-white">{d}</option>
+                ))}
               </select>
             </div>
 
@@ -128,7 +142,7 @@ export const HomePage = () => {
                   />
                   <span className="absolute top-3 right-3 inline-flex items-center gap-1 bg-black/60 backdrop-blur-md text-[#fbbf24] text-xs font-bold px-2.5 py-1 rounded-lg">
                     <Star className="w-3.5 h-3.5 fill-[#fbbf24] stroke-none" />
-                    {venue.rating.toFixed(1)}
+                    {venue.rating > 0 ? venue.rating.toFixed(1) : "Chưa có"}
                   </span>
                 </div>
 
@@ -168,7 +182,10 @@ export const HomePage = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {reviews.slice(0, 3).map((review) => (
+          {recentReviews?.length === 0 ? (
+            <p className="text-gray-400 text-sm col-span-3 text-center">Chưa có đánh giá nào.</p>
+          ) : (
+            recentReviews?.map((review) => (
             <div key={review.id} className="glass-card p-6 rounded-2xl flex flex-col justify-between h-full border border-white/5">
               <p className="text-gray-300 text-sm italic leading-relaxed mb-6 font-light">
                 "{review.comment}"
@@ -194,7 +211,8 @@ export const HomePage = () => {
                 </div>
               </div>
             </div>
-          ))}
+          ))
+          )}
         </div>
       </section>
     </div>

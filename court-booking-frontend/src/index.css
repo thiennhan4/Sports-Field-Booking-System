@@ -6,25 +6,86 @@
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-:root {
+:root,
+[data-theme="dark"] {
   color-scheme: dark;
+  --app-bg: #0b0f19;
+  --app-text: #f3f4f6;
+  --app-text-muted: #9ca3af;
+  --app-text-nav: #d1d5db;
+  --app-border: rgba(255, 255, 255, 0.08);
+  --app-surface: rgba(17, 24, 39, 0.5);
+  --app-dropdown: #1a1f2e;
+  --app-dropdown-hover-bg: rgba(255, 255, 255, 0.05);
+  --app-dropdown-hover-text: #ffffff;
+  --app-footer: rgba(3, 7, 18, 0.4);
+  --app-glass-bg: rgba(17, 24, 39, 0.7);
+  --app-glass-border: rgba(255, 255, 255, 0.08);
+  --app-btn-secondary-bg: rgba(255, 255, 255, 0.05);
+  --app-btn-secondary-text: #9ca3af;
+  --app-scrollbar-track: #0b0f19;
+  --app-scrollbar-thumb: #1e293b;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --app-bg: #f1f5f9;
+  --app-text: #0f172a;
+  --app-text-muted: #64748b;
+  --app-text-nav: #475569;
+  --app-border: rgba(15, 23, 42, 0.12);
+  --app-surface: rgba(255, 255, 255, 0.85);
+  --app-dropdown: #ffffff;
+  --app-dropdown-hover-bg: rgba(99, 102, 241, 0.08);
+  --app-dropdown-hover-text: #0f172a;
+  --app-footer: rgba(255, 255, 255, 0.8);
+  --app-glass-bg: rgba(255, 255, 255, 0.85);
+  --app-glass-border: rgba(15, 23, 42, 0.1);
+  --app-btn-secondary-bg: rgba(15, 23, 42, 0.05);
+  --app-btn-secondary-text: #64748b;
+  --app-scrollbar-track: #e2e8f0;
+  --app-scrollbar-thumb: #94a3b8;
 }
 
 body {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: #0b0f19;
-  color: #f3f4f6;
+  background-color: var(--app-bg);
+  color: var(--app-text);
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-bg { background-color: var(--app-bg); }
+.theme-text { color: var(--app-text); }
+.theme-text-muted { color: var(--app-text-muted); }
+.theme-text-nav { color: var(--app-text-nav); }
+.theme-border { border-color: var(--app-border); }
+.theme-surface { background-color: var(--app-surface); }
+.theme-dropdown { background-color: var(--app-dropdown); }
+.theme-footer { background-color: var(--app-footer); }
+.theme-btn-secondary {
+  background-color: var(--app-btn-secondary-bg);
+  color: var(--app-btn-secondary-text);
+}
+.theme-btn-secondary:hover {
+  background-color: var(--app-dropdown-hover-bg);
+}
+.hover\:theme-dropdown-hover:hover {
+  background-color: var(--app-dropdown-hover-bg);
+  color: var(--app-dropdown-hover-text);
+}
+.hover\:theme-text:hover {
+  color: var(--app-text);
 }
 
 /* Glassmorphism custom styles */
 .glass {
-  background: rgba(17, 24, 39, 0.7);
+  background: var(--app-glass-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--app-glass-border);
 }
 
 .glass-card {
@@ -34,6 +95,12 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="light"] .glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.98) 100%);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.08);
 }
 
 .glass-card:hover {
@@ -62,16 +129,17 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0b0f19;
+  background: var(--app-scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: var(--app-scrollbar-thumb);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: var(--app-scrollbar-thumb);
+  filter: brightness(1.15);
 }
 
 /* Animations */

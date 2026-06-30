@@ -10,25 +10,54 @@ import { User, Mail, ShieldAlert, Check } from "lucide-react";
 
 const profileSchema = z.object({
   fullName: z.string().min(2, "Họ và tên phải có ít nhất 2 ký tự"),
-  email: z.string().email("Địa chỉ email không hợp lệ")
+  email: z.string().email("Địa chỉ email không hợp lệ"),
+  phone: z.string().optional()
 });
 
 export const ProfilePage = () => {
   const { user } = useAuth();
   const [success, setSuccess] = useState(false);
   const [serverError, setServerError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting }
+    formState: { errors, isSubmitting },
+    setValue
   } = useForm({
     resolver: zodResolver(profileSchema),
     defaultValues: {
       fullName: user?.fullName || "",
-      email: user?.email || ""
+      email: user?.email || "",
+      phone: user?.phone || ""
     }
   });
+
+  // Load profile data from API when component mounts
+  React.useEffect(() => {
+    const loadProfile = async () => {
+      setIsLoading(true);
+      try {
+        const currentUser = await authService.getProfile();
+        setValue("fullName", currentUser.fullName || "");
+        setValue("email", currentUser.email || "");
+        setValue("phone", currentUser.phone || "");
+      } catch (err) {
+        console.error("Failed to load profile:", err);
+        // If API fails, use localStorage data as fallback
+        setValue("fullName", user?.fullName || "");
+        setValue("email", user?.email || "");
+        setValue("phone", user?.phone || "");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (user) {
+      loadProfile();
+    }
+  }, [user, setValue]);
 
   const onSubmit = async (data) => {
     setSuccess(false);
@@ -51,6 +80,15 @@ export const ProfilePage = () => {
         <ShieldAlert className="w-10 h-10 text-indigo-400 mx-auto mb-4" />
         <h2 className="text-lg font-bold text-white mb-2">Yêu cầu đăng nhập</h2>
         <p className="text-gray-400 text-xs">Vui lòng đăng nhập để xem thông tin cá nhân.</p>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="max-w-xl w-full mx-auto my-12 text-center glass-card p-8 rounded-3xl border border-white/5">
+        <div className="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        <p className="text-gray-400 text-xs">Đang tải thông tin...</p>
       </div>
     );
   }
@@ -124,6 +162,18 @@ export const ProfilePage = () => {
             {errors.email && (
               <span className="text-[10px] text-red-400 font-semibold">{errors.email.message}</span>
             )}
+          </div>
+
+          {/* Phone */}
+          <div className="space-y-1.5">
+            <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wide">
+              Số điện thoại
+            </label>
+            <input
+              type="text"
+              {...register("phone")}
+              className="w-full bg-[#111827]/50 border border-white/10 rounded-xl py-2.5 px-4 text-sm text-white outline-none focus:border-indigo-500/50"
+            />
           </div>
 
           <button

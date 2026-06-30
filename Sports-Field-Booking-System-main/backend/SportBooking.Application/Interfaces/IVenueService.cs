@@ -9,4 +9,5 @@ public interface IVenueService
     Task<VenueResponseDto> GetByIdAsync(Guid id);
     Task<VenueResponseDto> UpdateAsync(Guid ownerId, Guid id, UpdateVenueDto dto);
     Task DeleteAsync(Guid ownerId, Guid id);
+    Task<IEnumerable<VenueResponseDto>> SearchAsync(VenueSearchQueryDto query);
 }

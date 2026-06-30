@@ -1,3 +1,4 @@
+using SportBooking.Application.DTOs.Admin;
 using SportBooking.Domain.Entities;
 
 namespace SportBooking.Application.Interfaces;
@@ -9,4 +10,5 @@ public interface IAdminService
     Task<IEnumerable<User>> GetPendingOwnersAsync();
     Task<IEnumerable<User>> GetAllUsersAsync();
     Task ToggleUserBlockAsync(Guid userId);
+    Task<DashboardStatsDto> GetDashboardStatsAsync();
 }

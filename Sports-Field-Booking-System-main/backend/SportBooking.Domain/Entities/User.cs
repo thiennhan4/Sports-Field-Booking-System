@@ -13,6 +13,11 @@ public class User : BaseEntity
     public bool IsApproved { get; set; } = false; // For Owners
     public string? RefreshToken { get; set; }
     public DateTime? RefreshTokenExpiryTime { get; set; }
+    public string? PasswordResetOtp { get; set; }
+    public DateTime? PasswordResetOtpExpiryTime { get; set; }
+    public bool DarkMode { get; set; } = true;
+    public bool EmailNotifications { get; set; } = true;
+    public string Language { get; set; } = "vi";
 
     // Navigation properties
     public ICollection<Venue> Venues { get; set; } = new List<Venue>();

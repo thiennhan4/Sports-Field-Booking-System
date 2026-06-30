@@ -133,13 +133,18 @@ export const mapVenue = (venue) => ({
   status: mapVenueStatusToFrontend(venue.status),
   description: venue.description || "",
   phone: venue.phone || "",
-  rating: 4.5,
-  reviewCount: 0,
-  imageUrl:
+  rating: venue.averageRating || 0,
+  reviewCount: venue.reviewCount || 0,
+  imageUrl: venue.imageUrl ||
     "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?q=80&w=600&auto=format&fit=crop",
   ownerName: venue.ownerName,
   createdAt: venue.createdAt,
+  latitude: venue.latitude ?? null,
+  longitude: venue.longitude ?? null,
+  minPricePerHour: venue.minPricePerHour ?? null,
+  sportTypes: venue.sportTypes ?? [],
 });
+
 
 export const mapCourt = (court) => ({
   id: court.id,
@@ -163,11 +168,13 @@ export const mapBooking = (booking) => ({
   id: booking.id,
   userId: booking.userId,
   courtId: booking.courtId,
+  venueId: booking.venueId,
   bookingDate: normalizeDate(booking.bookingDate),
   slots: [formatSlotLabel(booking.startTime, booking.endTime)],
   totalPrice: Number(booking.totalPrice),
   status: mapBookingStatusToFrontend(booking.status),
-  paymentStatus: booking.status === "Confirmed" ? "PAID" : "PENDING",
+  paymentStatus:
+    booking.status === "Confirmed" || booking.status === "Completed" ? "PAID" : "PENDING",
   createdAt: booking.createdAt,
   courtName: booking.courtName || "N/A",
   sportType: "N/A",
@@ -186,7 +193,44 @@ export const mapPendingOwner = (owner) => ({
   createdAt: normalizeDate(owner.createdAt),
 });
 
+export const mapAdminUser = (user) => ({
+  id: user.id,
+  fullName: user.username,
+  email: user.email,
+  phone: user.phone,
+  role: mapRoleToFrontend(user.role),
+  isBlocked: user.isBlocked,
+  isPending: user.role === "Owner" && !user.isApproved,
+  createdAt: normalizeDate(user.createdAt),
+});
+
+export const mapReview = (review) => ({
+  id: review.id,
+  rating: review.rating,
+  comment: review.comment || "",
+  userName: review.userName,
+  venueId: review.venueId,
+  venueName: review.venueName,
+  bookingId: review.bookingId,
+  createdAt: normalizeDate(review.createdAt),
+});
+
+export const mapUserProfile = (profile) => ({
+  id: profile.id,
+  fullName: profile.fullName || profile.username,
+  email: profile.email,
+  phone: profile.phone,
+  role: mapRoleToFrontend(profile.role),
+  isApproved: profile.isApproved,
+  createdAt: normalizeDate(profile.createdAt),
+});
+
 const extractDistrict = (address = "") => {
+  if (!address) return "";
+  const parts = address.split(",");
+  if (parts.length > 1) {
+    return parts[parts.length - 1].trim();
+  }
   const match = address.match(/Quận\s*\d+|Q\.\s*\d+|District\s*\d+/i);
   return match ? match[0] : "";
 };

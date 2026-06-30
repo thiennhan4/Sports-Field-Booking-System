@@ -6,6 +6,13 @@ import { useAuth } from "../../hooks/useAuth";
 import { venueService } from "../../services/venue.service";
 import { Plus, Edit2, Trash2, MapPin, X } from "lucide-react";
 
+const HCMC_DISTRICTS = [
+  "Quận 1", "Quận 3", "Quận 4", "Quận 5", "Quận 6", "Quận 7", "Quận 8", 
+  "Quận 10", "Quận 11", "Quận 12", "Bình Thạnh", "Tân Bình", "Phú Nhuận", 
+  "Thủ Đức", "Gò Vấp", "Tân Phú", "Bình Tân", "Bình Chánh", "Hóc Môn", 
+  "Củ Chi", "Nhà Bè", "Cần Giờ"
+];
+
 export const OwnerVenuesPage = () => {
   const { user } = useAuth();
   const queryClient = useQueryClient();
@@ -20,6 +27,9 @@ export const OwnerVenuesPage = () => {
   const [district, setDistrict] = useState("Quận 7");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [phone, setPhone] = useState("");
+  const [isCustomDistrict, setIsCustomDistrict] = useState(false);
+  const [customDistrict, setCustomDistrict] = useState("");
 
   // Query: Fetch owner's venues
   const { data: ownerVenues, isLoading } = useQuery({
@@ -59,8 +69,11 @@ export const OwnerVenuesPage = () => {
     setName("");
     setAddress("");
     setDistrict("Quận 7");
+    setIsCustomDistrict(false);
+    setCustomDistrict("");
     setDescription("");
     setImageUrl("");
+    setPhone("");
     setModalOpen(true);
   };
 
@@ -68,9 +81,20 @@ export const OwnerVenuesPage = () => {
     setEditingVenue(venue);
     setName(venue.name);
     setAddress(venue.address);
-    setDistrict(venue.district);
     setDescription(venue.description);
     setImageUrl(venue.imageUrl);
+    setPhone(venue.phone || "");
+    
+    if (HCMC_DISTRICTS.includes(venue.district)) {
+      setDistrict(venue.district);
+      setIsCustomDistrict(false);
+      setCustomDistrict("");
+    } else {
+      setDistrict("custom");
+      setIsCustomDistrict(true);
+      setCustomDistrict(venue.district || "");
+    }
+    
     setModalOpen(true);
   };
 
@@ -87,12 +111,14 @@ export const OwnerVenuesPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const finalDistrict = isCustomDistrict ? customDistrict.trim() : district;
     const data = {
       name,
       address,
-      district,
+      district: finalDistrict,
       description,
       imageUrl: imageUrl || undefined,
+      phone: phone || "0900000000",
       ownerId: user.id
     };
 
@@ -197,16 +223,29 @@ export const OwnerVenuesPage = () => {
             </h3>
 
             <form onSubmit={handleSubmit} className="space-y-4 text-xs md:text-sm">
-              <div className="space-y-1.5">
-                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wide">Tên cơ sở thể thao</label>
-                <input
-                  type="text"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Sân Cầu Lông ABC"
-                  className="w-full bg-[#111827]/50 border border-white/10 rounded-xl py-2.5 px-4 text-white outline-none focus:border-purple-500/50"
-                />
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wide">Tên cơ sở thể thao</label>
+                  <input
+                    type="text"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Sân Cầu Lông ABC"
+                    className="w-full bg-[#111827]/50 border border-white/10 rounded-xl py-2.5 px-4 text-white outline-none focus:border-purple-500/50"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wide">Số điện thoại liên hệ</label>
+                  <input
+                    type="text"
+                    required
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="0900000000"
+                    className="w-full bg-[#111827]/50 border border-white/10 rounded-xl py-2.5 px-4 text-white outline-none focus:border-purple-500/50"
+                  />
+                </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -214,14 +253,28 @@ export const OwnerVenuesPage = () => {
                   <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wide">Quận/Huyện</label>
                   <select
                     value={district}
-                    onChange={(e) => setDistrict(e.target.value)}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setDistrict(val);
+                      setIsCustomDistrict(val === "custom");
+                    }}
                     className="w-full bg-[#111827]/50 border border-white/10 rounded-xl py-2.5 px-4 text-white outline-none focus:border-purple-500/50 cursor-pointer"
                   >
-                    <option value="Quận 7">Quận 7</option>
-                    <option value="Bình Thạnh">Bình Thạnh</option>
-                    <option value="Quận 1">Quận 1</option>
-                    <option value="Tân Bình">Tân Bình</option>
+                    {HCMC_DISTRICTS.map((d) => (
+                      <option key={d} value={d} className="bg-[#0b0f19] text-white">{d}</option>
+                    ))}
+                    <option value="custom" className="bg-[#0b0f19] text-purple-400 font-bold">Khác (Nhập mới)...</option>
                   </select>
+                  {isCustomDistrict && (
+                    <input
+                      type="text"
+                      required
+                      value={customDistrict}
+                      onChange={(e) => setCustomDistrict(e.target.value)}
+                      placeholder="Nhập quận/huyện mới"
+                      className="w-full mt-1.5 bg-[#111827]/50 border border-white/10 rounded-xl py-2 px-4 text-white outline-none focus:border-purple-500/50 text-xs animate-fade-in"
+                    />
+                  )}
                 </div>
                 
                 <div className="space-y-1.5">
