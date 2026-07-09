@@ -1,7 +1,107 @@
-version: "3.8"
+# Docker Compose dung de test local truoc khi deploy len AWS ECS.
+# Mo phong kien truc: Frontend (Nginx) -> Backend (ASP.NET) -> SQL Server + Redis.
+
 services:
+  frontend:
+    build:
+      context: ./court-booking-frontend
+      dockerfile: Dockerfile
+      args:
+        # Local browser calls the backend through the host port.
+        VITE_API_BASE_URL: http://localhost:8080/api
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - sportbooking-network
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./Sports-Field-Booking-System-main/backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=SportBookingDb;User Id=sa;Password=YourStrong@Password123;TrustServerCertificate=True;"
+      Redis__ConnectionString: redis:6379
+      Jwt__SecretKey: SuperSecretKeyForDevelopment1234567890!
+      Jwt__Issuer: https://sportbooking.local
+      Jwt__Audience: https://sportbooking.local
+      FrontendUrl: http://localhost:3000
+      ApiUrl: http://localhost:8080
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks:
+      - sportbooking-network
+    restart: unless-stopped
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - "1433:1433"
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "YourStrong@Password123"
+      MSSQL_PID: "Developer"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "/opt/mssql-tools18/bin/sqlcmd",
+          "-S",
+          "localhost",
+          "-U",
+          "sa",
+          "-P",
+          "YourStrong@Password123",
+          "-C",
+          "-Q",
+          "SELECT 1"
+        ]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+    networks:
+      - sportbooking-network
+    restart: unless-stopped
+
   redis:
-    image: redis:alpine
+    image: redis:7-alpine
     ports:
       - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sportbooking-network
     restart: unless-stopped
+    command: redis-server --appendonly yes
+
+volumes:
+  sqlserver_data:
+  redis_data:
+
+networks:
+  sportbooking-network:
+    driver: bridge

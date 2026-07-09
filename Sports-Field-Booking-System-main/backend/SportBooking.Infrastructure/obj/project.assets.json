@@ -5533,43 +5533,40 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ADMI\\.nuget\\packages\\": {},
+    "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\cursor-sandbox-cache\\ec61ef1d348e24afac7022e3b030e328\\nuget": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Hoc\\THUCTAP\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Infrastructure\\SportBooking.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\ADMIN\\OneDrive\\Máy tính\\New folder (2)\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Infrastructure\\SportBooking.Infrastructure.csproj",
       "projectName": "SportBooking.Infrastructure",
-      "projectPath": "D:\\Hoc\\THUCTAP\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Infrastructure\\SportBooking.Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\ADMI\\.nuget\\packages\\",
-      "outputPath": "D:\\Hoc\\THUCTAP\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Infrastructure\\obj\\",
+      "projectPath": "C:\\Users\\ADMIN\\OneDrive\\Máy tính\\New folder (2)\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Infrastructure\\SportBooking.Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\cursor-sandbox-cache\\ec61ef1d348e24afac7022e3b030e328\\nuget",
+      "outputPath": "C:\\Users\\ADMIN\\OneDrive\\Máy tính\\New folder (2)\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\ADMI\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "D:\\Hoc\\THUCTAP\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Application\\SportBooking.Application.csproj": {
-              "projectPath": "D:\\Hoc\\THUCTAP\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Application\\SportBooking.Application.csproj"
+            "C:\\Users\\ADMIN\\OneDrive\\Máy tính\\New folder (2)\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Application\\SportBooking.Application.csproj": {
+              "projectPath": "C:\\Users\\ADMIN\\OneDrive\\Máy tính\\New folder (2)\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Application\\SportBooking.Application.csproj"
             },
-            "D:\\Hoc\\THUCTAP\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Domain\\SportBooking.Domain.csproj": {
-              "projectPath": "D:\\Hoc\\THUCTAP\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Domain\\SportBooking.Domain.csproj"
+            "C:\\Users\\ADMIN\\OneDrive\\Máy tính\\New folder (2)\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Domain\\SportBooking.Domain.csproj": {
+              "projectPath": "C:\\Users\\ADMIN\\OneDrive\\Máy tính\\New folder (2)\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Domain\\SportBooking.Domain.csproj"
             }
           }
         }
@@ -5641,7 +5638,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

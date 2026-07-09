@@ -1,0 +1,23 @@
+# Node modules (sẽ được cài bằng npm ci trong build stage)
+node_modules/
+
+# Build output
+dist/
+
+# Environment files (API URL sẽ truyền qua ARG lúc build)
+.env
+.env.local
+.env.production
+
+# IDE & OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Docker files
+Dockerfile
+nginx.conf
+.dockerignore

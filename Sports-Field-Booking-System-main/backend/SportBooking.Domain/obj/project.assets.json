@@ -8,32 +8,29 @@
     "net9.0": []
   },
   "packageFolders": {
-    "C:\\Users\\ADMI\\.nuget\\packages\\": {},
+    "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\cursor-sandbox-cache\\ec61ef1d348e24afac7022e3b030e328\\nuget": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Hoc\\THUCTAP\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Domain\\SportBooking.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\ADMIN\\OneDrive\\Máy tính\\New folder (2)\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Domain\\SportBooking.Domain.csproj",
       "projectName": "SportBooking.Domain",
-      "projectPath": "D:\\Hoc\\THUCTAP\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Domain\\SportBooking.Domain.csproj",
-      "packagesPath": "C:\\Users\\ADMI\\.nuget\\packages\\",
-      "outputPath": "D:\\Hoc\\THUCTAP\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Domain\\obj\\",
+      "projectPath": "C:\\Users\\ADMIN\\OneDrive\\Máy tính\\New folder (2)\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Domain\\SportBooking.Domain.csproj",
+      "packagesPath": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\cursor-sandbox-cache\\ec61ef1d348e24afac7022e3b030e328\\nuget",
+      "outputPath": "C:\\Users\\ADMIN\\OneDrive\\Máy tính\\New folder (2)\\Sports-Field-Booking-System\\Sports-Field-Booking-System-main\\backend\\SportBooking.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\ADMI\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -73,7 +70,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

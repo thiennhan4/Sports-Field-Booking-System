@@ -164,7 +164,7 @@ using (var scope = app.Services.CreateScope())
 // Configure the HTTP request pipeline.
 app.UseMiddleware<ExceptionMiddleware>();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c =>
@@ -175,7 +175,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseSerilogRequestLogging();
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsStaging())
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseCors("AllowAll");
 
@@ -199,5 +202,6 @@ RecurringJob.AddOrUpdate<UnpaidBookingCancelJob>(
 );
 
 app.MapControllers();
+app.MapGet("/health", () => Results.Ok("ok"));
 
 app.Run();

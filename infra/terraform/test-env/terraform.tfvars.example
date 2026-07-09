@@ -1,0 +1,17 @@
+project_name = "sportbooking-test"
+environment  = "test"
+aws_region   = "ap-southeast-1"
+
+# ECS service starts at 0 because the ECR image does not exist until Phase 4.
+# After pushing the image, use AWS CLI to set desired-count to 1.
+ecs_cpu           = 512
+ecs_memory        = 1024
+ecs_desired_count = 0
+
+rds_instance_class    = "db.t3.small"
+rds_allocated_storage = 20
+rds_database_name     = "SportFieldBookingDb"
+rds_username          = "sportbookingadmin"
+
+redis_node_type = "cache.t3.micro"
+frontend_url    = "http://localhost:3000"

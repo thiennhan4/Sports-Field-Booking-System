@@ -29,3 +29,19 @@ D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\back
 D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\refint\SportBooking.Application.dll
 D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\SportBooking.Application.pdb
 D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\ref\SportBooking.Application.dll
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\bin\Debug\net9.0\SportBooking.Application.deps.json
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\bin\Debug\net9.0\SportBooking.Application.dll
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\bin\Debug\net9.0\SportBooking.Application.pdb
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\bin\Debug\net9.0\SportBooking.Domain.dll
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\bin\Debug\net9.0\SportBooking.Domain.pdb
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\SportBooking.Application.csproj.AssemblyReference.cache
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\SportBooking.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\SportBooking.Application.AssemblyInfoInputs.cache
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\SportBooking.Application.AssemblyInfo.cs
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\SportBooking.Application.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\SportBooking.Application.sourcelink.json
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\SportBoo.13BC7460.Up2Date
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\SportBooking.Application.dll
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\refint\SportBooking.Application.dll
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\SportBooking.Application.pdb
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Application\obj\Debug\net9.0\ref\SportBooking.Application.dll

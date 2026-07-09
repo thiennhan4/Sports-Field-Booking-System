@@ -1,0 +1,35 @@
+# Secrets & local env
+.env
+.env.*
+!.env.aws.example
+terraform.tfvars
+test-env-outputs.txt
+CLOUD_TEST_RESULTS.md
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+tfplan
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# .NET build output
+**/bin/
+**/obj/
+
+# IDE & OS
+.vs/
+.vscode/
+*.user
+.DS_Store
+Thumbs.db
+
+# Portable tools (downloaded locally)
+scripts/tools/terraform.exe
+scripts/tools/aws-cli/

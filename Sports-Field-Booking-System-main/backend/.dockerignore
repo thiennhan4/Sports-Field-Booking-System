@@ -1,0 +1,25 @@
+# Build output
+**/bin/
+**/obj/
+
+# IDE & OS
+.vs/
+.vscode/
+*.user
+.DS_Store
+Thumbs.db
+
+# Logs
+**/*.log
+**/logs/
+
+# Test projects (không cần trong production image)
+**/SportBooking.UnitTests/
+
+# Local config overrides
+**/appsettings.Development.json
+
+# Docker files (không cần copy vào image)
+Dockerfile
+docker-compose.yml
+.dockerignore

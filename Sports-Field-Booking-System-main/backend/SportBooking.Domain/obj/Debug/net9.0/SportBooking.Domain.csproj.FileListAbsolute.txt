@@ -21,3 +21,15 @@ D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\back
 D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\refint\SportBooking.Domain.dll
 D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.pdb
 D:\Hoc\THUCTAP\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\ref\SportBooking.Domain.dll
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\bin\Debug\net9.0\SportBooking.Domain.deps.json
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\bin\Debug\net9.0\SportBooking.Domain.dll
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\bin\Debug\net9.0\SportBooking.Domain.pdb
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.AssemblyInfoInputs.cache
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.AssemblyInfo.cs
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.sourcelink.json
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.dll
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\refint\SportBooking.Domain.dll
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\SportBooking.Domain.pdb
+C:\Users\ADMIN\OneDrive\Máy tính\New folder (2)\Sports-Field-Booking-System\Sports-Field-Booking-System-main\backend\SportBooking.Domain\obj\Debug\net9.0\ref\SportBooking.Domain.dll
